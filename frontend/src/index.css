@@ -1,0 +1,280 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   LexOrch-KG Global Design System
+   Dark legal theme with glassmorphism and smooth animations
+   ============================================================ */
+
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: rgba(30, 41, 59, 0.7);
+  --border: rgba(100, 116, 139, 0.2);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --accent-blue: #3a70f5;
+  --accent-gold: #f59e0b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --warning: #f59e0b;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Base dark theme */
+body {
+  @apply bg-dark-950 text-dark-100 font-sans antialiased;
+  background-image: 
+    radial-gradient(ellipse at top left, rgba(58, 112, 245, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(245, 158, 11, 0.04) 0%, transparent 50%);
+  min-height: 100vh;
+}
+
+/* Selection */
+::selection {
+  background: rgba(58, 112, 245, 0.3);
+  color: #f1f5f9;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+/* ── Glassmorphism Cards ─────────────────────────────────────────── */
+.glass {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(100, 116, 139, 0.2);
+  border-radius: 12px;
+}
+
+.glass-light {
+  background: rgba(30, 41, 59, 0.3);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(100, 116, 139, 0.15);
+  border-radius: 8px;
+}
+
+/* ── Gradient Text ───────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #3a70f5 0%, #6366f1 50%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #f59e0b 0%, #fcd34d 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Neon Glow Effects ────────────────────────────────────────────── */
+.glow-blue {
+  box-shadow: 0 0 20px rgba(58, 112, 245, 0.3), 0 0 40px rgba(58, 112, 245, 0.1);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3), 0 0 40px rgba(245, 158, 11, 0.1);
+}
+
+.glow-green {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+/* ── Gradient Buttons ─────────────────────────────────────────────── */
+.btn-primary {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white
+    transition-all duration-300 cursor-pointer select-none;
+  background: linear-gradient(135deg, #3a70f5 0%, #6366f1 100%);
+  box-shadow: 0 4px 15px rgba(58, 112, 245, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(58, 112, 245, 0.4);
+}
+
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold
+    text-dark-200 transition-all duration-300 cursor-pointer select-none;
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+.btn-secondary:hover {
+  background: rgba(51, 65, 85, 0.8);
+  border-color: rgba(58, 112, 245, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  @apply inline-flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-white
+    transition-all duration-300 cursor-pointer select-none;
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+}
+
+/* ── Cards ────────────────────────────────────────────────────────── */
+.card {
+  @apply glass p-6 transition-all duration-300;
+}
+
+.card:hover {
+  border-color: rgba(58, 112, 245, 0.3);
+  box-shadow: 0 8px 32px rgba(58, 112, 245, 0.1);
+}
+
+/* ── Status Badges ────────────────────────────────────────────────── */
+.badge {
+  @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-semibold;
+}
+
+.badge-blue     { @apply bg-blue-500/20 text-blue-300 border border-blue-500/30; }
+.badge-green    { @apply bg-emerald-500/20 text-emerald-300 border border-emerald-500/30; }
+.badge-yellow   { @apply bg-yellow-500/20 text-yellow-300 border border-yellow-500/30; }
+.badge-red      { @apply bg-red-500/20 text-red-300 border border-red-500/30; }
+.badge-purple   { @apply bg-purple-500/20 text-purple-300 border border-purple-500/30; }
+.badge-gray     { @apply bg-dark-700/50 text-dark-300 border border-dark-600/30; }
+
+/* ── Input Fields ─────────────────────────────────────────────────── */
+.input {
+  @apply w-full px-4 py-3 rounded-xl bg-dark-800/60 border border-dark-600/40
+    text-dark-100 placeholder-dark-400 transition-all duration-200
+    focus:outline-none focus:ring-2 focus:ring-primary-500/40 focus:border-primary-500/60;
+}
+
+/* ── Section Headings ─────────────────────────────────────────────── */
+.section-title {
+  @apply text-2xl font-bold text-dark-100;
+}
+
+.section-subtitle {
+  @apply text-dark-400 mt-1;
+}
+
+/* ── Agent Step States ─────────────────────────────────────────────── */
+.agent-step-completed { @apply text-emerald-400; }
+.agent-step-running   { @apply text-primary-400 animate-pulse; }
+.agent-step-pending   { @apply text-dark-500; }
+.agent-step-failed    { @apply text-red-400; }
+
+/* ── Disclaimer Banner ──────────────────────────────────────────────── */
+.disclaimer-banner {
+  @apply flex items-start gap-3 p-4 rounded-xl border text-sm;
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #fca5a5;
+}
+
+/* ── Animated Grid Background ─────────────────────────────────────── */
+.grid-bg {
+  background-image: 
+    linear-gradient(rgba(58, 112, 245, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(58, 112, 245, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* ── Loading Spinner ─────────────────────────────────────────────── */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(58, 112, 245, 0.2);
+  border-top-color: #3a70f5;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Progress Bar ─────────────────────────────────────────────────── */
+.progress-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(30, 41, 59, 0.8);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #3a70f5, #6366f1);
+  transition: width 0.5s ease;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────── */
+.sidebar-link {
+  @apply flex items-center gap-3 px-4 py-2.5 rounded-xl text-dark-400
+    transition-all duration-200 cursor-pointer text-sm font-medium;
+}
+
+.sidebar-link:hover {
+  @apply text-dark-100 bg-dark-800/60;
+}
+
+.sidebar-link.active {
+  @apply text-primary-300 bg-primary-500/10;
+  border: 1px solid rgba(58, 112, 245, 0.2);
+}
+
+/* ── Debate Sections ──────────────────────────────────────────────── */
+.debate-prosecution { 
+  border-left: 3px solid #ef4444;
+  @apply pl-4 bg-red-500/5 rounded-r-lg;
+}
+
+.debate-defense { 
+  border-left: 3px solid #3b82f6;
+  @apply pl-4 bg-blue-500/5 rounded-r-lg;
+}
+
+.debate-judge { 
+  border-left: 3px solid #8b5cf6;
+  @apply pl-4 bg-purple-500/5 rounded-r-lg;
+}
+
+.debate-consensus { 
+  border-left: 3px solid #10b981;
+  @apply pl-4 bg-emerald-500/5 rounded-r-lg;
+}
+
+/* ── Animations ───────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fade-in  { animation: fadeIn  0.3s ease-in-out; }
+.animate-slide-up { animation: slideUp 0.4s ease-out; }
+.animate-slide-in { animation: slideIn 0.3s ease-out; }
+
+/* ── React Flow nodes ─────────────────────────────────────────────── */
+.react-flow__node {
+  border-radius: 10px !important;
+}
+
+.react-flow__edge-path {
+  stroke: rgba(58, 112, 245, 0.5) !important;
+}
