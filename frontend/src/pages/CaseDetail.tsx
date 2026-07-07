@@ -38,7 +38,10 @@ export default function CaseDetail() {
       const { data } = await casesApi.get(id!)
       return data
     },
-    refetchInterval: caseData?.status === 'processing' ? 5000 : false,
+    refetchInterval: (query) => {
+      const status = (query.state.data as any)?.status
+      return status === 'processing' || status === 'analyzing' || status === 'debating' ? 5000 : false
+    },
   })
 
   const handleReanalyze = async () => {
