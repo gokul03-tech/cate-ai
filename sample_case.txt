@@ -1,0 +1,20 @@
+CASE REPORT: STATE OF CALIFORNIA V. ARTHUR PENDLETON
+
+Date: October 14, 2024
+Case Number: CR-2024-88902
+
+STATEMENT OF FACTS:
+On the night of September 12, 2024, at approximately 11:30 PM, the defendant, Arthur Pendleton, was apprehended by Officer Jane Martinez of the Los Angeles Police Department. Officer Martinez responded to a silent alarm triggered at "Apex Tech Solutions", located at 455 Grand Avenue, Los Angeles, CA. 
+
+Upon arrival, Officer Martinez observed a broken window on the east side of the building. Officer Martinez entered the building and encountered the defendant, Arthur Pendleton, in the primary server room holding a duffel bag. Inside the duffel bag, officers found three high-end development laptops valued at $3,500 each, and a solid-state server backup unit valued at $5,000. 
+
+The defendant, Arthur Pendleton, was read his Miranda rights and taken into custody. Arthur Pendleton claims he was not committing burglary. He asserts that he is an employee of a subcontractor company, "Nexus IT Consultants", and was instructed by his supervisor, Frank Miller, to retrieve the equipment for emergency off-site maintenance. He states that he did not have his keycard on him and broke the window out of panic when his keycard didn't work, because the maintenance had to be completed before 12:00 AM. 
+
+However, Frank Miller of Nexus IT Consultants has denied giving any such instructions to Arthur Pendleton. Frank Miller stated that no emergency maintenance was scheduled and that subcontractors are strictly forbidden from removing server backup units or laptops from the office premises without written authorization from the Chief Information Officer, Sarah Jenkins. 
+
+APPLICABLE STATUTES:
+California Penal Code Section 459 - Burglary:
+Every person who enters any house, room, apartment, tenement, shop, warehouse, store, mill, barn, stable, outhouse, or other building, with intent to commit grand or petit larceny or any felony is guilty of burglary.
+
+California Penal Code Section 487 - Grand Theft:
+Grand theft is theft committed when the money, labor, or real or personal property taken is of a value exceeding nine hundred fifty dollars ($950).
