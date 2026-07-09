@@ -4,6 +4,7 @@ Configures test clients and overrides FastAPI database dependencies.
 """
 
 import pytest
+import pytest_asyncio
 from typing import AsyncGenerator
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
@@ -28,7 +29,7 @@ TestingSessionLocal = async_sessionmaker(
 )
 
 
-@pytest.fixture(scope="session", autouse=True)
+@pytest_asyncio.fixture(scope="session", autouse=True)
 async def setup_test_db():
     """Create all tables in memory before testing."""
     async with test_engine.begin() as conn:
@@ -39,7 +40,7 @@ async def setup_test_db():
     await test_engine.dispose()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def db_session() -> AsyncGenerator[AsyncSession, None]:
     """Get an isolated transaction session for each test."""
     async with TestingSessionLocal() as session:
@@ -53,7 +54,7 @@ async def db_session() -> AsyncGenerator[AsyncSession, None]:
             await session.close()
 
 
-@pytest.fixture
+@pytest_asyncio.fixture
 async def client(db_session: AsyncSession) -> AsyncGenerator[AsyncClient, None]:
     """Get an AsyncClient hooked up to the FastAPI app with dependency overrides."""
     def _override_get_db():

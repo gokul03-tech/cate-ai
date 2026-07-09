@@ -14,6 +14,8 @@ from app.core.security import verify_access_token
 from app.infrastructure.postgres.models import User
 from app.repositories.repositories import UserRepository
 
+from uuid import UUID
+
 # HTTP Bearer token extractor
 security = HTTPBearer(auto_error=True)
 
@@ -34,9 +36,10 @@ async def get_current_user(
 
     try:
         payload = verify_access_token(token)
-        user_id = payload.get("sub")
-        if not user_id:
+        sub = payload.get("sub")
+        if not sub:
             raise ValueError("Missing user ID in token")
+        user_id = UUID(str(sub))
     except ValueError as e:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

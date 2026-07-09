@@ -19,6 +19,7 @@ from fastapi import (
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import CurrentUser, get_current_user, require_roles
+from app.infrastructure.postgres.models import User
 from app.core.database import get_db
 from app.infrastructure.neo4j.client import neo4j_client
 from app.repositories.repositories import (
@@ -55,10 +56,10 @@ router = APIRouter(prefix="/cases", tags=["Cases"])
     summary="Upload a legal case document",
 )
 async def upload_case(
+    current_user: CurrentUser,
     title: str = Form(..., description="Case title"),
     description: Optional[str] = Form(None),
     file: UploadFile = File(..., description="PDF, DOCX, or TXT file"),
-    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """
@@ -91,7 +92,7 @@ async def upload_case(
 )
 async def analyze_case(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """
@@ -117,9 +118,9 @@ async def analyze_case(
     summary="List all cases",
 )
 async def list_cases(
+    current_user: CurrentUser,
     page: int = Query(default=1, ge=1),
     page_size: int = Query(default=20, ge=1, le=100),
-    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """List cases. Admins see all cases; others see only their own."""
@@ -141,7 +142,7 @@ async def list_cases(
 )
 async def get_case(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """Retrieve full case detail including all agent execution results."""
@@ -159,8 +160,8 @@ async def get_case(
 )
 async def get_entities(
     case_id: UUID,
+    current_user: CurrentUser,
     entity_type: Optional[str] = Query(None),
-    current_user: CurrentUser = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
     """Get all legal entities extracted from the case document."""
@@ -179,7 +180,7 @@ async def get_entities(
 )
 async def get_knowledge_graph(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
 ):
     """
     Retrieve nodes and edges for the case knowledge graph.
@@ -205,7 +206,7 @@ async def get_knowledge_graph(
 )
 async def get_debate(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """Retrieve the adversarial debate transcript for this case."""
@@ -226,7 +227,7 @@ async def get_debate(
 )
 async def get_explainability(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """
@@ -253,7 +254,7 @@ async def get_explainability(
 async def submit_review(
     case_id: UUID,
     review: HumanReviewCreate,
-    current_user: CurrentUser = Depends(require_roles("admin", "judge", "lawyer")),
+    current_user: User = Depends(require_roles("admin", "judge", "lawyer")),
     db: AsyncSession = Depends(get_db),
 ):
     """
@@ -282,7 +283,7 @@ async def submit_review(
 )
 async def delete_case(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """Permanently delete a case and all associated data. Admin only."""

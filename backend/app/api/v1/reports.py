@@ -25,7 +25,7 @@ router = APIRouter(prefix="/reports", tags=["Reports"])
 )
 async def list_reports(
     case_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """List all generated reports for the given case."""
@@ -39,7 +39,7 @@ async def list_reports(
 )
 async def download_report(
     report_id: UUID,
-    current_user: CurrentUser = Depends(get_current_user),
+    current_user: CurrentUser,
     db: AsyncSession = Depends(get_db),
 ):
     """
