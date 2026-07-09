@@ -16,15 +16,22 @@ from sqlalchemy.orm import DeclarativeBase
 from app.core.config import settings
 
 # ---------------------------------------------------------------------------
-# Async Engine
-# ---------------------------------------------------------------------------
+engine_kwargs = {
+    "echo": settings.debug,
+}
+
+# Apply connection pooling only for PostgreSQL/MySQL
+if not settings.database_url.startswith("sqlite"):
+    engine_kwargs.update({
+        "pool_pre_ping": True,
+        "pool_size": 10,
+        "max_overflow": 20,
+        "pool_recycle": 3600,
+    })
+
 engine = create_async_engine(
     settings.database_url,
-    echo=settings.debug,
-    pool_pre_ping=True,       # Test connection validity before use
-    pool_size=10,             # Connection pool size
-    max_overflow=20,          # Extra connections above pool_size
-    pool_recycle=3600,        # Recycle connections every hour
+    **engine_kwargs,
 )
 
 # ---------------------------------------------------------------------------

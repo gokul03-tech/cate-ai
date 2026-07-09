@@ -19,6 +19,12 @@ def configure_logging() -> None:
     # Remove default handler
     logger.remove()
 
+    # Reconfigure sys.stdout encoding to handle UTF-8 symbols in Windows consoles
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except AttributeError:
+        pass
+
     # ── Console sink ────────────────────────────────────────────────────────
     log_format = (
         "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | "

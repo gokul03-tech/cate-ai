@@ -35,9 +35,9 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30
     refresh_token_expire_days: int = 7
 
-    # ── PostgreSQL ────────────────────────────────────────────────────────────
+    # ── Database ─────────────────────────────────────────────────────────────
     database_url: str = (
-        "postgresql+asyncpg://lexorch:lexorch_secret@localhost:5432/lexorch_db"
+        "sqlite+aiosqlite:///./lexorch.db"
     )
 
     # ── Neo4j ─────────────────────────────────────────────────────────────────
