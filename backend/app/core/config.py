@@ -53,7 +53,7 @@ class Settings(BaseSettings):
     # ── LLM ──────────────────────────────────────────────────────────────────
     llm_provider: Literal["groq", "openai", "ollama"] = "groq"
     groq_api_key: str = ""
-    groq_model: str = "llama3-70b-8192"
+    groq_model: str = "llama-3.3-70b-specdec"
     openai_api_key: str = ""
     openai_model: str = "gpt-4o"
     ollama_base_url: str = "http://localhost:11434"
