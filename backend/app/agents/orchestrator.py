@@ -109,7 +109,7 @@ class LegalPipeline:
         graph.add_node("retrieval", self._run_retrieval)
         graph.add_node("reasoning", self._run_reasoning)
         graph.add_node("debate", self._run_debate)
-        graph.add_node("explainability", self._run_explainability)
+        graph.add_node("explainability_analysis", self._run_explainability)
         graph.add_node("report_generation", self._run_report)
 
         # Define edges (linear pipeline)
@@ -119,8 +119,8 @@ class LegalPipeline:
         graph.add_edge("knowledge_graph", "retrieval")
         graph.add_edge("retrieval", "reasoning")
         graph.add_edge("reasoning", "debate")
-        graph.add_edge("debate", "explainability")
-        graph.add_edge("explainability", "report_generation")
+        graph.add_edge("debate", "explainability_analysis")
+        graph.add_edge("explainability_analysis", "report_generation")
         graph.add_edge("report_generation", END)
 
         return graph.compile()
