@@ -120,6 +120,10 @@ class CaseService:
         if not case:
             raise ValueError(f"Case {case_id} not found")
 
+        if case.status in [CaseStatus.PROCESSING, CaseStatus.ANALYZING, CaseStatus.DEBATING]:
+            logger.warning(f"Case {case_id} is already being analyzed (status: {case.status}). Ignoring duplicate request.")
+            return
+
         # Update status to processing
         await self.case_repo.update_status(case_id, CaseStatus.PROCESSING)
 
