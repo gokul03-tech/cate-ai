@@ -6,7 +6,10 @@ Wires together all routers, middleware, startup/shutdown lifecycle, and health c
 import os
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from loguru import logger
@@ -128,6 +131,42 @@ app.add_middleware(
 # Trusted host middleware (production security)
 if settings.is_production:
     app.add_middleware(TrustedHostMiddleware, allowed_hosts=["lexorch.ai", "*.lexorch.ai"])
+
+
+# =============================================================================
+# Exception Handlers (with CORS headers to prevent browser network failures on errors)
+# =============================================================================
+
+def get_cors_headers(request: Request) -> dict[str, str]:
+    origin = request.headers.get("origin")
+    headers = {}
+    allowed = settings.allowed_origins_list
+    if origin in allowed:
+        headers["Access-Control-Allow-Origin"] = origin
+    elif allowed:
+        headers["Access-Control-Allow-Origin"] = allowed[0]
+    headers["Access-Control-Allow-Credentials"] = "true"
+    headers["Access-Control-Allow-Methods"] = "*"
+    headers["Access-Control-Allow-Headers"] = "*"
+    return headers
+
+
+@app.exception_handler(StarletteHTTPException)
+async def http_exception_handler(request: Request, exc: StarletteHTTPException):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
+        headers=get_cors_headers(request),
+    )
+
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    return JSONResponse(
+        status_code=422,
+        content={"detail": exc.errors()},
+        headers=get_cors_headers(request),
+    )
 
 
 # =============================================================================

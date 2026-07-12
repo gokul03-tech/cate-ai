@@ -235,11 +235,11 @@ class ExplainabilityRead(BaseModel):
     """Explainability response."""
     id: UUID
     case_id: UUID
-    recommendation: Optional[str]
-    reasoning_chain: Optional[list[str]]
-    evidence_used: Optional[list[dict[str, Any]]]
+    recommendation: Optional[str] = None
+    reasoning_chain: Optional[list[str]] = None
+    evidence_used: Optional[list[Any]] = None
     sections_applied: Optional[list[str]]
-    precedents_cited: Optional[list[dict[str, Any]]]
+    precedents_cited: Optional[list[Any]] = None
     confidence_score: Optional[float]
     confidence_breakdown: Optional[dict[str, float]]
     limitations: Optional[list[str]]
